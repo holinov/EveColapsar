@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -8,6 +9,8 @@ using Zen.Eve.Colapsar.Annotations;
 
 namespace Zen.Eve.Colapsar.Models
 {
+    public class WormholeCollection:ObservableCollection<WormholeModel>{}
+
     public class WormholeModel : MvcModel
     {
         private string _class = "O477";
@@ -106,7 +109,6 @@ namespace Zen.Eve.Colapsar.Models
         {
             get { return new UndoJumpCommand(this); }
         }
-
         public void AddPassage(int passedMass, bool mwdUsed)
         {
             var direction = Passages.Count%2 == 0 ? PassageDirection.Out : PassageDirection.In;
@@ -121,6 +123,11 @@ namespace Zen.Eve.Colapsar.Models
                 });
             OnPropertyChanged("LeftMass");
             OnPropertyChanged("Passages");
+        }
+
+        public override string ToString()
+        {
+            return Class;
         }
 
         #region Commands
@@ -197,6 +204,7 @@ namespace Zen.Eve.Colapsar.Models
             public void Execute(object parameter)
             {
                 _wormholeModel.Passages.Clear();
+                _wormholeModel.CurrentJumpIndex = -1;
                 var res = BuildTree(_wormholeModel.Mass, true).ToArray();
                 Console.WriteLine(res.Count());
                 //те решения которые схлопнули дырку при прыжке внутрь

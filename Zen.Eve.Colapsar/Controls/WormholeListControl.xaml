@@ -1,0 +1,40 @@
+﻿<UserControl x:Class="Zen.Eve.Colapsar.Controls.WormholeListControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:models="clr-namespace:Zen.Eve.Colapsar.Models"
+             xmlns:controls="clr-namespace:Zen.Eve.Colapsar.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <ObjectDataProvider ObjectType="models:WormholeListModel" x:Key="Model"></ObjectDataProvider>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal">
+            <Button Command="{Binding Source={StaticResource Model},Path=AddWormhole}">Новая чревоточина</Button>
+        </StackPanel>
+
+        <TabControl SelectedIndex="{Binding Source={StaticResource Model},Path=CurrentWormhole,Mode=TwoWay}" 
+                    Grid.Row="1" ItemsSource="{Binding Source={StaticResource Model},Path=Wormholes,Mode=TwoWay}" 
+                    TabStripPlacement="Left">
+            <TabControl.ItemTemplate>
+                <!-- this is the header template-->
+                <DataTemplate>
+                    <TextBlock
+                    Text="{Binding Class,Mode=OneWay}" />
+                </DataTemplate>
+            </TabControl.ItemTemplate>
+            <TabControl.ContentTemplate>
+                <!-- this is the body of the TabItem template-->
+                <DataTemplate>
+                    <controls:WormholeControl DataContext="{Binding Mode=TwoWay,Path=.}" />
+                </DataTemplate>
+            </TabControl.ContentTemplate>
+        </TabControl>
+    </Grid>
+</UserControl>

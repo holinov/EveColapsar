@@ -53,12 +53,27 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controls\WormholeControl.xaml.cs">
+      <DependentUpon>WormholeControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\WormholeListControl.xaml.cs">
+      <DependentUpon>WormholeListControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Models\MvcModel.cs" />
     <Compile Include="Models\Passage.cs" />
     <Compile Include="Models\PassageDirection.cs" />
     <Compile Include="Models\PassagesCollection.cs" />
+    <Compile Include="Models\WormholeListModel.cs" />
     <Compile Include="Models\WormholeModel.cs" />
     <Compile Include="Properties\Annotations.cs" />
+    <Page Include="Controls\WormholeControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\WormholeListControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
